@@ -7,11 +7,12 @@ CompleteLaunch::CompleteLaunch() {
 
 	SmartDashboard::PutNumber("Desired Angle", targetAngle);
 
-	AddSequential(new Rotate());
 	AddParallel(new SetLauncherAngle());
-	Wait(1);
+	AddSequential(new Rotate());
+	//Wait(0.3);
+	AddParallel(new Load());
 	AddSequential(new Launch());
-	//load
+
 
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());

@@ -5,6 +5,7 @@
 #include "Commands/Rotate.h"
 #include "Commands/Launch.h"
 #include "Commands/SetLauncherAngle.h"
+#include "Commands/Load.h"
 
 class CompleteLaunch : public CommandGroup {
 public:

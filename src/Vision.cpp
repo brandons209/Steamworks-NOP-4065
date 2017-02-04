@@ -22,6 +22,19 @@ void Vision::createThread(){
 
 }
 
+cv::Mat Vision::connectLine(cv::Mat img, cv::Point start, cv::Point end){
+
+	  int thickness = 2;
+	  int lineType = 8;
+	  cv::line( img,
+	        start,
+	        end,
+	        cv::Scalar( 0, 0, 255 ),
+	        thickness,
+	        lineType );
+	 return img;
+}
+
 void Vision::VisionThread(std::promise<std::vector<std::vector<cv::Point> > > outputValues){
 
 	grip::GripPipeline *visionProcessor = new grip::GripPipeline();

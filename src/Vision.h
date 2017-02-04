@@ -23,6 +23,7 @@ public:
 	Vision();
 	void createThread();
 	void processVision();
+	cv::Mat connectLine(cv::Mat img, cv::Point start, cv::Point end);
 	void VisionThread(std::promise<std::vector<std::vector<cv::Point> > > outputValues);
 
 	std::vector<std::vector<cv::Point> > visionOutput;
