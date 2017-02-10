@@ -5,7 +5,8 @@
  *      Author: NerdsOfPrey
  */
 
-#include "JoystickAnalogButton.h"
+#include "JoystickButtons/JoystickAnalogButton.h"
+#include "WPILib.h"
 
 //This class is inherited from the Trigger class. This converts an axis into a button, useful for using the triggers on controllers as buttons.
 

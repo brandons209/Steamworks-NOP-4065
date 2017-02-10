@@ -13,8 +13,9 @@
 #define OI_H
 
 #include "WPILib.h"
-#include "ToggledPressedButtonScheduler.h"
-#include "JoystickAnalogButton.h"
+#include "JoystickButtons/ToggledPressedButtonScheduler.h"
+#include "JoystickButtons/JoystickAnalogButton.h"
+#include "JoystickButtons/POVButton.h"
 
 class OI {
 private:
@@ -30,6 +31,10 @@ private:
 	std::shared_ptr<JoystickAnalogButton> launch;
 	std::shared_ptr<JoystickButton> togButton;
 	std::shared_ptr<ToggledPressedButtonScheduler> toggleFrontandBack;
+	std::shared_ptr<POVButton> launcherAngleUp;
+	std::shared_ptr<POVButton> launcherAngleDown;
+	std::shared_ptr<POVButton> robotAngleLeft;
+	std::shared_ptr<POVButton> robotAngleRight;
 
 public:
 	OI();

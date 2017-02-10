@@ -5,7 +5,7 @@
  *      Author: NerdsOfPrey
  */
 #include <WPILib.h>
-#include <GripPipeline.h>
+#include <VisionClasses/GripPipeline.h>
 #include <thread>
 #include <future>
 #include <functional>

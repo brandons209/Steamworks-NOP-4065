@@ -29,7 +29,10 @@ void Load::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Load::Execute() {
-	Robot::loader.get()->loadItDude();
+	while(Robot::loader.get()->i < 100){
+		Robot::loader.get()->i++;//pause for 2 seconds for launcher to spin at beginning
+	}
+		Robot::loader.get()->loadItDude();
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -40,6 +43,7 @@ bool Load::IsFinished() {
 // Called once after isFinished returns true
 void Load::End() {
 	Robot::loader.get()->stop();
+	Robot::loader.get()->i = 0;
 }
 
 // Called when another command which requires one or more of the same

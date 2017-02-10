@@ -31,7 +31,7 @@
 #include "Subsystems/IntakeAndWinch.h"
 #include "Commands/UpdatePosition.h"
 #include "OI.h"
-#include "Vision.h"
+#include "VisionClasses/Vision.h"
 #include "SmartDashboard/SendableChooser.h"
 
 class Robot : public IterativeRobot {

@@ -64,7 +64,7 @@ public:
 	static constexpr double bottomTapeTowerHeight = 80;
 	static constexpr double bottomTapeHeight = 2;
 
-	static constexpr double distanceOmniWheelCircumference = 4 * M_PI;
+	static constexpr double distanceOmniWheelCircumference = 6 * M_PI;
 
 	static void init();
 

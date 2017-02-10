@@ -59,14 +59,15 @@ void RobotMap::init() {
     
     //launcheranglePot.reset(new AnalogPotentiometer(0, 360.0, 0.0));
     //lw->AddSensor("Launcher", "anglePot", launcheranglePot);
-    launcherangleEncoder.reset(new Encoder(0, 1, true, Encoder::k4X));
+    launcherangleEncoder.reset(new Encoder(0, 1, false, Encoder::k4X));
     lw->AddSensor("Launcher", "angleEncoder", launcherangleEncoder);
-    launcherangleEncoder.get()->SetDistancePerPulse(360.0/7.0);//change when testing
+    launcherangleEncoder.get()->SetDistancePerPulse(0.7);//change when testing
     launcherangleEncoder.get()->SetPIDSourceType(PIDSourceType::kDisplacement);
 
-    launcherlauncherEncoder.reset(new Encoder(2, 3, false, Encoder::k4X));
+    launcherlauncherEncoder.reset(new Encoder(2, 3, true, Encoder::k4X));
     lw->AddSensor("Launcher", "launcherEncoder", launcherlauncherEncoder);
     launcherlauncherEncoder.get()->SetDistancePerPulse(RobotMap::flywheelCircumference / 1440);
+    //launcherlauncherEncoder.get()->SetDistancePerPulse(144.0);
     launcherlauncherEncoder.get()->SetPIDSourceType(PIDSourceType::kRate);
     
     loaderloadIt.reset(new CANTalon(7));

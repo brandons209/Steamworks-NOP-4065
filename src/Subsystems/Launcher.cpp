@@ -34,6 +34,7 @@ Launcher::Launcher() : Subsystem("Launcher") {
     longVelocity = 360; //inches/sec
     I = 0;
     I2 = 0;
+    manualAngle = 0;
 
     launcherEncoder = RobotMap::launcherlauncherEncoder;
 
@@ -52,6 +53,14 @@ void Launcher::InitDefaultCommand() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void Launcher::reduceAngle(){
+	manualAngle--;
+}
+
+void Launcher::increaseAngle(){
+	manualAngle++;
+}
+
 void Launcher::calculateAngle(){
 	const double gravConst = 386.09;
 	const double towerHeight = 97.0;
@@ -65,9 +74,9 @@ void Launcher::calculateAngle(){
 	double a = (-0.5 * gravConst * pow(distanceFromBoiler, 2) ) / (pow(launchV, 2));
 	double c = a - towerHeight;
 
-	desiredAngle = atan( ( (-1 * distanceFromBoiler) - sqrt( (pow(distanceFromBoiler, 2)) - (4*a*c) ) ) / (2 * a) ) * (180/M_PI);
+	desiredAngle = manualAngle + (atan( ( (-1 * distanceFromBoiler) - sqrt( (pow(distanceFromBoiler, 2)) - (4*a*c) ) ) / (2 * a) ) * (180/M_PI) );
 
-
+	SmartDashboard::PutNumber("launcher Angle", desiredAngle);
 }
 
 void Launcher::moveToAngle(){
@@ -76,7 +85,9 @@ void Launcher::moveToAngle(){
 	const double kP = 0.02;
 	const double kI = 0.000000000001;
 
-	currentAngle = angleEncoder->GetDistance();
+	//angle is for 40 degrees at resting, 90 is max
+
+	currentAngle = angleEncoder->GetDistance() + 40;
 	double P = desiredAngle - currentAngle;
 	I += P;
 

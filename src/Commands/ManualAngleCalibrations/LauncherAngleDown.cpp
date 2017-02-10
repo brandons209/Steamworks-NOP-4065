@@ -1,33 +1,32 @@
-#include "Intake.h"
+#include "LauncherAngleDown.h"
 
-Intake::Intake() {
+LauncherAngleDown::LauncherAngleDown() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	Requires(Robot::intakeAndWinch.get());
 }
 
 // Called just before this Command runs the first time
-void Intake::Initialize() {
+void LauncherAngleDown::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void Intake::Execute() {
-	Robot::intakeAndWinch.get()->runIntake();
+void LauncherAngleDown::Execute() {
+	Robot::launcher.get()->reduceAngle();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool Intake::IsFinished() {
-	return false;
+bool LauncherAngleDown::IsFinished() {
+	return true;
 }
 
 // Called once after isFinished returns true
-void Intake::End() {
-	Robot::intakeAndWinch.get()->stop();
+void LauncherAngleDown::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void Intake::Interrupted() {
-	End();
+void LauncherAngleDown::Interrupted() {
+
 }

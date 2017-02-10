@@ -25,17 +25,16 @@ static void drawRectangles(){
 	cs::CvSink cvSink = CameraServer::GetInstance()->GetVideo();
 	cs::CvSource outputStream = CameraServer::GetInstance()->PutVideo("Gear Box", 640, 480);
 	cv::Mat source;
-	cv::Mat output;
 	Vision v;
 
 	while(true){
 		cvSink.GrabFrame(source);
-		cv::Point center = cv::Point(640.0/2.0, 480.0/2.0);
-		cv::Point bottom = cv::Point(640.0/2.0, 479.0);
+		cv::Point leftTop = cv::Point((640.0/2.0) - 20.0, 480.0/2.0);
+		cv::Point rightBot = cv::Point((640.0/2.0) + 20.0, 479);
 
-		output = v.connectLine(source, center, bottom);
+		cv::rectangle(source, leftTop, rightBot, cv::Scalar( 0, 0, 255 ), 4);
 
-		outputStream.PutFrame(output);
+		outputStream.PutFrame(source);
 
 	}
 
@@ -70,7 +69,7 @@ void Robot::RobotInit() {
 	SmartDashboard::PutString("alliance color for boiler side:(red or blue)", "red");
 
 	updatePosition.reset(new UpdatePosition());
-	updatePosition->Start();
+	//updatePosition->Start();
 
 	SmartDashboard::PutNumber("Drive to point x:", 0);
 	SmartDashboard::PutNumber("Drive to point y:", 0);
@@ -82,6 +81,8 @@ void Robot::RobotInit() {
 	std::thread gearboxThread(drawRectangles);
 	gearboxThread.detach();
 
+	driveTrain.get()->ahrs.get()->ZeroYaw();
+
   }
 
 /**
@@ -89,7 +90,7 @@ void Robot::RobotInit() {
  * You can use it to reset subsystems before shutting down.
  */
 void Robot::DisabledInit(){
-
+	updatePosition->Start();
 }
 
 void Robot::DisabledPeriodic() {
@@ -97,6 +98,7 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
+	updatePosition->Start();
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Start();
 }
@@ -110,6 +112,7 @@ void Robot::TeleopInit() {
 	// teleop starts running. If you want the autonomous to
 	// continue until interrupted by another command, remove
 	// these lines or comment it out.
+	updatePosition->Start();
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Cancel();
 }

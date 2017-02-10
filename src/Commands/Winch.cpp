@@ -13,7 +13,7 @@ void Winch::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Winch::Execute() {
-	Robot::intakeAndWinch.get()->runIntake();
+	Robot::intakeAndWinch.get()->runWinch();
 }
 
 // Make this return true when this Command no longer needs to run execute()

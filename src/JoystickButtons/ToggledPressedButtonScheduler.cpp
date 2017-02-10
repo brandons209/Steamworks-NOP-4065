@@ -1,4 +1,4 @@
-#include "ToggledPressedButtonScheduler.h"
+#include "JoystickButtons/ToggledPressedButtonScheduler.h"
 
 ToggledPressedButtonScheduler::ToggledPressedButtonScheduler(bool last, Trigger *button, Command *firstCommand, Command *secondCommand) :
         PressedButtonScheduler(last, button, firstCommand)//parameters for the pressedbuttonscheduler constructor, needs a trigger first command
