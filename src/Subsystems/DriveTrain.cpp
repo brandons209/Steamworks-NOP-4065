@@ -44,6 +44,9 @@ DriveTrain::DriveTrain() : Subsystem("DriveTrain") {
     lastXPos = 0;
     lastYPos = 0;
 
+    xOffset = Robot::xOffset;
+    yOffset = Robot::yOffset;
+
     switched = false;
 }
 
@@ -140,7 +143,7 @@ void DriveTrain::updatePos(){
 	SmartDashboard::PutNumber("Y raw pos", currentYPos);
 	SmartDashboard::PutNumber("X velocity", rightFront.get()->GetPulseWidthVelocity());
 	SmartDashboard::PutNumber("Y velocity", rightBack.get()->GetPulseWidthVelocity());
-	SmartDashboard::PutNumber("angle of robot", ahrs.get()->GetAngle());
+	SmartDashboard::PutNumber("angle of robot", ahrs.get()->GetAngle() + manualAngle);
 
 	rawX = currentXPos - lastXPos;
 	rawY = currentYPos - lastYPos;
@@ -153,12 +156,12 @@ void DriveTrain::updatePos(){
 	double theata = ahrs->GetAngle() * radiansConversion;
 	double alpha = (M_PI/2) - theata;
 
-	double xOffset, yOffset = SmartDashboard::GetNumber("Y distance from center of boiler", 0);
+	yOffset = Robot::yOffset;
 
-	if(SmartDashboard::GetString("alliance color for boiler side:(red or blue)", "red") == "red"){
-		xOffset = SmartDashboard::GetNumber("X distance from center of boiler", 0);
+	if(Robot::allianceSide == "red"){
+		xOffset = Robot::xOffset;
 	}else{
-		xOffset = -1 * SmartDashboard::GetNumber("X distance from center of boiler", 0);
+		xOffset = -1 * Robot::xOffset;
 	}
 
 	realX += (rawX * (cos(theata)) + rawY * (cos(alpha)) ) + xOffset; //-x from center of boiler, depending on side of field
@@ -196,7 +199,7 @@ void DriveTrain::driveToPoint(double xTargetPos, double yTargetPos){
 
 	updatePos();
 
-	if(realX != xTargetPos && realY != yTargetPos){
+	if(realX < xTargetPos && realY < yTargetPos){
 		driveForward();
 	}else{
 		isFinished = true;
