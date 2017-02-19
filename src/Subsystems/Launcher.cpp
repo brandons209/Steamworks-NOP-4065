@@ -87,7 +87,7 @@ void Launcher::moveToAngle(){
 
 	//angle is for 40 degrees at resting, 90 is max
 
-	currentAngle = angleEncoder->GetDistance() + 40;
+	currentAngle = angleEncoder->GetDistance() + 50;
 	double P = desiredAngle - currentAngle;
 	I += P;
 
@@ -103,12 +103,12 @@ void Launcher::launchFam(double desiredVelocity){
 	const double kI = 0.000000000001;
 	double currentVelocity = launcherEncoder->GetRate();
 
-	//double P = desiredVelocity - currentVelocity;
-//	I2 += P;
+	double P = desiredVelocity - currentVelocity;
+	I2 += P;
 
-//	launcherMotor->Set(P*kP + I*kI);
+	launcherMotor->Set(P*kP + I*kI);
 
-	launcherMotor->Set(-0.5);
+	//launcherMotor->Set(-0.5);
 
 	/*if(isLinedUp){
 		//load

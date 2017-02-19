@@ -83,7 +83,7 @@ void Robot::RobotInit() {
 
 
 
-	/*allianceColor.get()->AddDefault("Blue Alliance", "blue");
+	allianceColor.get()->AddDefault("Blue Alliance", "blue");
 	allianceColor.get()->AddObject("Red Alliance", "red");
 	SmartDashboard::PutData("Choose Alliance Side", allianceColor.get());
 	allianceSide = allianceColor.get()->GetSelected();
@@ -106,7 +106,7 @@ void Robot::RobotInit() {
 	autoChooser2.get()->AddObject("Shoot station 1", "s1");
 	autoChooser2.get()->AddObject("Shoot station 2", "s2");
 	autoChooser2.get()->AddObject("Shoot station 3", "s3");
-	SmartDashboard::PutData("Second Auto Mode", autoChooser2.get());*/
+	SmartDashboard::PutData("Second Auto Mode", autoChooser2.get());
 
 	updatePosition.reset(new UpdatePosition());
 
@@ -153,9 +153,9 @@ void Robot::TeleopInit() {
 	// teleop starts running. If you want the autonomous to
 	// continue until interrupted by another command, remove
 	// these lines or comment it out.
-	//chooseAllianceNumber();
-	//allianceSide = allianceColor.get()->GetSelected();
-	//updatePosition->Start();
+	chooseAllianceNumber();
+	allianceSide = allianceColor.get()->GetSelected();
+	updatePosition->Start();
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Cancel();
 }
