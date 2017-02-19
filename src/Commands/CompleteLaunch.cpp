@@ -9,7 +9,6 @@ CompleteLaunch::CompleteLaunch() {
 
 	AddParallel(new SetLauncherAngle());
 	AddSequential(new Rotate());
-	//Wait(0.3);
 	AddParallel(new Load());
 	AddSequential(new Launch());
 

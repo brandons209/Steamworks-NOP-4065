@@ -48,7 +48,7 @@ OI::OI() {
     load->WhileActive(new Load());
 
     launch.reset(new JoystickAnalogButton(joystick.get(), 3));
-    load->WhileActive(new CompleteLaunch());
+    load->WhileActive(new Launch());
 
     intakeBalls.reset(new JoystickButton(joystick.get(), 6));
     intakeBalls->WhileHeld(new Intake());
