@@ -99,16 +99,17 @@ void Launcher::moveToAngle(){
 
 void Launcher::launchFam(double desiredVelocity){
 
-	const double kP = 0.02;
-	const double kI = 0.000000000001;
+	//const double kP = 0.02;
+	//const double kI = 0.000000000001;
 	double currentVelocity = launcherEncoder->GetRate();
+	SmartDashboard::PutNumber("Launcher Velocity", currentVelocity);
 
-	double P = desiredVelocity - currentVelocity;
-	I2 += P;
+	//double P = desiredVelocity - currentVelocity;
+	//I2 += P;
 
-	launcherMotor->Set(P*kP + I*kI);
+	//launcherMotor->Set(P*kP + I*kI);
 
-	//launcherMotor->Set(-0.5);
+	launcherMotor->Set(-0.5);
 
 	/*if(isLinedUp){
 		//load
