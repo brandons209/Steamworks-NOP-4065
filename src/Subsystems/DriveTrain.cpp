@@ -148,8 +148,8 @@ void DriveTrain::updatePos(){
 
 	SmartDashboard::PutNumber("X raw pos", currentXPos);
 	SmartDashboard::PutNumber("Y raw pos", currentYPos);
-	SmartDashboard::PutNumber("X velocity", rightFront.get()->GetPulseWidthVelocity());
-	SmartDashboard::PutNumber("Y velocity", rightBack.get()->GetPulseWidthVelocity());
+	//SmartDashboard::PutNumber("X velocity", rightFront.get()->GetPulseWidthVelocity());
+	//SmartDashboard::PutNumber("Y velocity", rightBack.get()->GetPulseWidthVelocity());
 	SmartDashboard::PutNumber("angle of robot", ahrs.get()->GetAngle() + manualAngle);
 
 	rawX = currentXPos - lastXPos;
@@ -168,8 +168,8 @@ void DriveTrain::updatePos(){
 
 	//above values use the change in position from last calculated absolute positon value and add them together using gyro to get xy pos on the field.
 
-	SmartDashboard::PutNumber("Raw X", rawX);
-	SmartDashboard::PutNumber("Raw Y", rawY);
+	//SmartDashboard::PutNumber("Raw X", rawX);
+	//SmartDashboard::PutNumber("Raw Y", rawY);
 
 	SmartDashboard::PutNumber("Real X", realX);
 	SmartDashboard::PutNumber("Real Y", realY);

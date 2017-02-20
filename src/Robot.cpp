@@ -38,10 +38,10 @@ static void drawRectangles(){
 		cvSink.GrabFrame(source);
 
 		if(!source.empty()){
-			cv::Point leftTop = cv::Point((640.0/2.0) - 20.0, 480.0/2.0);
-			cv::Point rightBot = cv::Point((640.0/2.0) + 20.0, 479);
+			cv::Point leftTop = cv::Point((640.0/2.0) - 10.0, 480.0/2.0);
+			cv::Point rightBot = cv::Point((640.0/2.0) + 10.0, 479);
 
-			cv::rectangle(source, leftTop, rightBot, cv::Scalar( 0, 0, 255 ), 4);
+			cv::rectangle(source, leftTop, rightBot, cv::Scalar( 0, 255, 255 ), 4);
 
 			outputStream.PutFrame(source);
 		}else{

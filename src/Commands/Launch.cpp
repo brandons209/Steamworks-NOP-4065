@@ -31,7 +31,7 @@ void Launch::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void Launch::Execute() {
 	Robot::launcher.get()->calculateAngle();
-	Robot::launcher.get()->launchFam(Robot::launcher.get()->shortVelocity);
+	Robot::launcher.get()->launchFam();
 	Robot::loader.get()->loadItDude();
 }
 

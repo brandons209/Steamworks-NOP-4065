@@ -38,7 +38,7 @@ public:
 	Launcher();
 	void InitDefaultCommand();
 	void calculateAngle();
-	void launchFam(double);
+	void launchFam();
 	void moveToAngle();
 	void reduceAngle();
 	void increaseAngle();

@@ -3,7 +3,7 @@
 CompleteLaunch::CompleteLaunch() {
 
 	double degreeConversion = 180/M_PI;
-	double targetAngle = atan( (Robot::driveTrain.get()->realY) / (Robot::driveTrain.get()->realX) ) * degreeConversion;
+	double targetAngle = atan2( (Robot::driveTrain.get()->realY), (Robot::driveTrain.get()->realX) ) * degreeConversion;
 
 	SmartDashboard::PutNumber("Desired Angle", targetAngle);
 
