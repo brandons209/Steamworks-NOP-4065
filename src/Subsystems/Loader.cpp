@@ -36,7 +36,11 @@ void Loader::InitDefaultCommand() {
 }
 
 void Loader::loadItDude(){
-	limitWheel->Set(0.5);
+	if(i < 50){//wait for a second
+		i++;
+	}else{
+		limitWheel->Set(-1.0);
+	}
 }
 
 void Loader::stop(){

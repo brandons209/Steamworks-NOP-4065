@@ -30,7 +30,9 @@ void Launch::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Launch::Execute() {
+	Robot::launcher.get()->calculateAngle();
 	Robot::launcher.get()->launchFam(Robot::launcher.get()->shortVelocity);
+	Robot::loader.get()->loadItDude();
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +43,9 @@ bool Launch::IsFinished() {
 // Called once after isFinished returns true
 void Launch::End() {
 	Robot::launcher.get()->launcherMotor->Set(0);
+	Robot::loader.get()->stop();
 	Robot::launcher.get()->I2 = 0;
+	Robot::loader.get()->i = 0;
 }
 
 // Called when another command which requires one or more of the same

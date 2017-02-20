@@ -135,9 +135,16 @@ void DriveTrain::rotate(double targetAngle){
 // here. Call these from Commands.
 
 void DriveTrain::updatePos(){
+	yOffset = Robot::yOffset;
 
-	double currentXPos = (RobotMap::distanceOmniWheelCircumference * rightFront.get()->GetEncPosition() ) / 4096;
-	double currentYPos = (RobotMap::distanceOmniWheelCircumference * rightBack.get()->GetEncPosition()  ) / 4096;
+	if(Robot::allianceSide == "red"){
+		xOffset = Robot::xOffset;
+	}else{
+		xOffset = -1 * Robot::xOffset;
+	}
+
+	double currentXPos = xOffset + ( (RobotMap::distanceOmniWheelCircumference * rightFront.get()->GetEncPosition() ) / 4096);
+	double currentYPos = yOffset + ( (RobotMap::distanceOmniWheelCircumference * rightBack.get()->GetEncPosition()  ) / 4096);
 
 	SmartDashboard::PutNumber("X raw pos", currentXPos);
 	SmartDashboard::PutNumber("Y raw pos", currentYPos);
@@ -156,16 +163,8 @@ void DriveTrain::updatePos(){
 	double theata = ahrs->GetAngle() * radiansConversion;
 	double alpha = (M_PI/2) - theata;
 
-	yOffset = Robot::yOffset;
-
-	if(Robot::allianceSide == "red"){
-		xOffset = Robot::xOffset;
-	}else{
-		xOffset = -1 * Robot::xOffset;
-	}
-
-	realX += (rawX * (cos(theata)) + rawY * (cos(alpha)) ) + xOffset; //-x from center of boiler, depending on side of field
-	realY += (rawX * (sin(theata)) + rawY * (sin(alpha)) )- yOffset; //- y from center of boiler
+	realX += (rawX * (cos(theata)) + rawY * (cos(alpha)) ); //-x from center of boiler, depending on side of field
+	realY += (rawX * (sin(theata)) + rawY * (sin(alpha)) ); //- y from center of boiler
 
 	//above values use the change in position from last calculated absolute positon value and add them together using gyro to get xy pos on the field.
 

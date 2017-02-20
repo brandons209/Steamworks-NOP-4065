@@ -29,9 +29,9 @@ void Load::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Load::Execute() {
-	while(Robot::loader.get()->i < 100){
-		Robot::loader.get()->i++;//pause for 2 seconds for launcher to spin at beginning
-	}
+//	while(Robot::loader.get()->i < 100){
+	//	Robot::loader.get()->i++;//pause for 2 seconds for launcher to spin at beginning
+	//}
 		Robot::loader.get()->loadItDude();
 }
 
