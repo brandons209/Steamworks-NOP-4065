@@ -119,7 +119,7 @@ void DriveTrain::rotate(double targetAngle){
 	I += P;
 
 	leftFront.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
-	leftBack.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
+	leftBack.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);//need to see if it rotates direction closest to angle.
 	rightFront.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
 	rightBack.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
 

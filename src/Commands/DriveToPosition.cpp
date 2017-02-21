@@ -17,9 +17,22 @@
 
 DriveToPosition::DriveToPosition() {
 	double degreeConversion = 180/M_PI;
-	double targetAngle = atan( (Robot::driveTrain.get()->realY - SmartDashboard::PutNumber("Drive to point y:", 0)) / (Robot::driveTrain.get()->realX - SmartDashboard::PutNumber("Drive to point x:", 0)) ) * degreeConversion;
 
-	SmartDashboard::PutNumber("Desired Angle", targetAngle);
+	double targetX = SmartDashboard::PutNumber("Drive to point x:", 0);
+	double targetY = SmartDashboard::PutNumber("Drive to point y:", 0);
+
+	double currentX = Robot::driveTrain.get()->realX;
+	double currentY = Robot::driveTrain.get()->realY;//same
+
+	double targetAngle;
+
+	if(targetX - currentX < 0){
+		targetAngle = 180 + (atan( (currentY - targetY) / (currentX - targetX ) ) * degreeConversion);
+	}else{
+		targetAngle = (atan( (currentY - targetY) / (currentX - targetX ) ) * degreeConversion);
+	}
+
+	SmartDashboard::PutNumber("Desired Angle To Rotate", targetAngle);
 
 	AddSequential(new Rotate());
 	AddSequential(new DriveForward());

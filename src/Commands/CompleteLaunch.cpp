@@ -3,11 +3,19 @@
 CompleteLaunch::CompleteLaunch() {
 
 	double degreeConversion = 180/M_PI;
-	double targetAngle = atan2( (Robot::driveTrain.get()->realY), (Robot::driveTrain.get()->realX) ) * degreeConversion;
+	double currentX = Robot::driveTrain.get()->realX;
+	double currentY = Robot::driveTrain.get()->realY;
+	double targetAngle;
 
-	SmartDashboard::PutNumber("Desired Angle", targetAngle);
+	if(0 - currentX < 0){
+		targetAngle = 180 + (atan2( currentY, currentX ) * degreeConversion);
+	}else{
+		targetAngle = atan2( currentY, currentX ) * degreeConversion;
+	}
 
-	//AddSequential(new Rotate());
+	SmartDashboard::PutNumber("Desired Angle To Rotate", targetAngle);
+
+	AddSequential(new Rotate());
 	AddParallel(new SetLauncherAngle());
 	AddSequential(new Launch());
 
