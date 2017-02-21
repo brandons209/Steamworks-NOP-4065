@@ -102,16 +102,16 @@ void Launcher::moveToAngle(){
 }
 
 void Launcher::launchFam(){
-	double x = SmartDashboard::GetNumber("Real X", 0);
-	double y = SmartDashboard::GetNumber("Real Y", 0);
-	double distanceFromBoiler = sqrt( (pow(x, 2) + pow(y, 2)) );
+	//double x = SmartDashboard::GetNumber("Real X", 0);
+	//double y = SmartDashboard::GetNumber("Real Y", 0);
+	//double distanceFromBoiler = sqrt( (pow(x, 2) + pow(y, 2)) );
 	double desiredVelocity;
 
-	if(distanceFromBoiler < 250){//250 inches
+	//if(distanceFromBoiler < 250){//250 inches
 		desiredVelocity = shortVelocity;
-	}else{
-		desiredVelocity = longVelocity;
-	}
+	//}else{
+		//desiredVelocity = longVelocity;
+	//}
 
 	const double kP = 0.03;
 	const double kI = 0.000000000001;

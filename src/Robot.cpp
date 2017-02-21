@@ -55,7 +55,7 @@ void Robot::chooseAllianceNumber(){
 	const double station3X = 102.97;
 	const double station2X = 175.16;
 	const double station1X = 205.97;
-	yOffset = 25.5 - 6.36;//fix, robot starts backwards
+	yOffset = 25.5 - 6.36;
 	if(driverStation.GetSelected() == "1"){
 		xOffset = station1X;
 	}else if(driverStation.GetSelected() == "2"){
