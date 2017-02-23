@@ -30,7 +30,7 @@ void Rotate::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void Rotate::Execute() {
-	Robot::driveTrain.get()->rotate(SmartDashboard::GetNumber("Desired Angle To Rotate", 0));
+	Robot::driveTrain.get()->rotate(SmartDashboard::GetNumber("Desired Angle To Rotate for boiler", 0));
 }
 
 // Make this return true when this Command no longer needs to run execute()

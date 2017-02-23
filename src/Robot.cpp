@@ -55,7 +55,9 @@ void Robot::chooseAllianceNumber(){
 	const double station3X = 102.97;
 	const double station2X = 175.16;
 	const double station1X = 205.97;
+	//const double station1X = 0.0;
 	yOffset = 25.5 - 6.36;
+	//yOffset = 248.0;
 	if(driverStation.GetSelected() == "1"){
 		xOffset = station1X;
 	}else if(driverStation.GetSelected() == "2"){

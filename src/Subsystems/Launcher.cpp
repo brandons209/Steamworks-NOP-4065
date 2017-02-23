@@ -70,6 +70,9 @@ void Launcher::calculateAngle(){
 	double y = SmartDashboard::GetNumber("Real Y", 0);
 
 	//double x = 5, y = 5;
+	//12 degrees off before
+
+	//7 degrees off
 
 	double distanceFromBoiler = sqrt( (pow(x, 2) + pow(y, 2)) );
 
@@ -80,7 +83,7 @@ void Launcher::calculateAngle(){
 	//SmartDashboard::PutNumber("A", a);
 	//SmartDashboard::PutNumber("C", c);
 
-	desiredAngle = manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( abs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) );
+	desiredAngle = 90 - (manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( abs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) ) );
 	SmartDashboard::PutNumber("launcher Angle", desiredAngle);
 }
 
@@ -90,12 +93,12 @@ void Launcher::moveToAngle(){
 	const double kP = 0.05;
 	const double kI = 0.00000001;
 
-	currentAngle = angleEncoder->GetDistance() + 40;
+	currentAngle = angleEncoder->GetDistance() + 50;
 	SmartDashboard::PutNumber("Current Angle", currentAngle);
 	double P = desiredAngle - currentAngle;
 	I += P;
 
-	angleChanger->Set(P*kP + I*kI);
+	angleChanger->Set(-1.0 * (P*kP + I*kI));
 
 	//reset I in command
 

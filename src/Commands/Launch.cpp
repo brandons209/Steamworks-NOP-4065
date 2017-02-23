@@ -31,7 +31,7 @@ void Launch::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void Launch::Execute() {
 	Robot::launcher.get()->calculateAngle();
-	Robot::launcher.get()->launchFam();
+	//Robot::launcher.get()->launchFam();
 	Robot::loader.get()->loadItDude();
 }
 
@@ -46,6 +46,7 @@ void Launch::End() {
 	Robot::loader.get()->stop();
 	Robot::launcher.get()->I2 = 0;
 	Robot::loader.get()->i = 0;
+	//Robot::loader.get()->switchTimer = 0;
 }
 
 // Called when another command which requires one or more of the same

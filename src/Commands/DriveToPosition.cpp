@@ -22,7 +22,7 @@ DriveToPosition::DriveToPosition() {
 	double targetY = SmartDashboard::PutNumber("Drive to point y:", 0);
 
 	double currentX = Robot::driveTrain.get()->realX;
-	double currentY = Robot::driveTrain.get()->realY;//same
+	double currentY = Robot::driveTrain.get()->realY;
 
 	double targetAngle;
 
