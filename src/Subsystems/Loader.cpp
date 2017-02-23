@@ -55,8 +55,14 @@ void Loader::loadItDude(){
 	}else{
 		limitWheel->Set(0.55);
 		if(!lastCommand){
+			if(blenderR.get()->IsRunning()){
+				blenderR.get()->Cancel();
+			}
 			blenderF.get()->Start();
 		}else{
+			if(blenderF.get()->IsRunning()){
+				blenderF.get()->Cancel();
+			}
 			blenderR.get()->Start();
 		}
 	}

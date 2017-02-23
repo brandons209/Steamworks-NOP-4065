@@ -32,6 +32,7 @@
 #include "Commands/ManualAngleCalibrations/LauncherAngleDown.h"
 #include "Commands/ManualAngleCalibrations/RobotAngleLeft.h"
 #include "Commands/ManualAngleCalibrations/RobotAngleRight.h"
+#include "Commands/LowGoalLaunch.h"
 
 OI::OI() {
     // Process operator interface input here.
@@ -44,11 +45,11 @@ OI::OI() {
     //launchFam.reset(new JoystickButton(joystick.get(), 8));//same as above
     //launchFam->WhileHeld(new CompleteLaunch());
 
-    load.reset(new JoystickAnalogButton(joystick.get(), 2));
-    load->WhileActive(new Load());
+    lowGoalLaunch.reset(new JoystickAnalogButton(joystick.get(), 3));
+    lowGoalLaunch->WhileActive(new LowGoalLaunch());
 
-    launch.reset(new JoystickAnalogButton(joystick.get(), 3));
-    load->WhileActive(new CompleteLaunch());//needs to be complete launch
+    launch.reset(new JoystickAnalogButton(joystick.get(), 2));
+    launch->WhileActive(new CompleteLaunch());//needs to be complete launch
 
     intakeBalls.reset(new JoystickButton(joystick.get(), 6));
     intakeBalls->WhileHeld(new Intake());

@@ -40,6 +40,7 @@ public:
 	void calculateAngle();
 	void launchFam();
 	void moveToAngle();
+	void lowGoalMoveAngle();
 	void reduceAngle();
 	void increaseAngle();
 	double desiredAngle;
