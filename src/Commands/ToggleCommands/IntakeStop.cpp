@@ -1,34 +1,33 @@
-#include "BlenderForward.h"
+#include "IntakeStop.h"
 
-BlenderForward::BlenderForward() {
+IntakeStop::IntakeStop() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	SetTimeout(3);
-	Requires(Robot::loader.get());
+	Requires(Robot::intakeAndWinch.get());
 }
 
 // Called just before this Command runs the first time
-void BlenderForward::Initialize() {
+void IntakeStop::Initialize() {
 
 }
 
 // Called repeatedly when this Command is scheduled to run
-void BlenderForward::Execute() {
-	Robot::loader.get()->blenderForward();
+void IntakeStop::Execute() {
+	Robot::intakeAndWinch.get()->stop();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool BlenderForward::IsFinished() {
-	return IsTimedOut();
+bool IntakeStop::IsFinished() {
+	return true;
 }
 
 // Called once after isFinished returns true
-void BlenderForward::End() {
-	Robot::loader.get()->lastCommand = true;
+void IntakeStop::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void BlenderForward::Interrupted() {
-	End();
+void IntakeStop::Interrupted() {
+
 }

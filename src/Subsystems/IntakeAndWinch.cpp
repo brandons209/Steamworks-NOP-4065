@@ -12,7 +12,7 @@ void IntakeAndWinch::InitDefaultCommand() {
 }
 
 void IntakeAndWinch::runIntake(){
-	intakeMotor.get()->Set(-0.51);
+	intakeMotor.get()->Set(-0.4);
 }
 
 void IntakeAndWinch::runWinch(){

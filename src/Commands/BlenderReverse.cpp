@@ -3,7 +3,7 @@
 BlenderReverse::BlenderReverse() {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	SetTimeout(2);
+	SetTimeout(3);
 	Requires(Robot::loader.get());
 }
 
