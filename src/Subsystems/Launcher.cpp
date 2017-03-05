@@ -31,7 +31,7 @@ Launcher::Launcher() : Subsystem("Launcher") {
     desiredAngle = 0;
     currentAngle = 0;
     shortVelocity = 550;//inches/sec
-    longVelocity = 260; //inches/sec
+    longVelocity = 760; //inches/sec
     I = 0;
     I2 = 0;
     manualAngle = 0;
@@ -83,7 +83,10 @@ void Launcher::calculateAngle(){
 	//SmartDashboard::PutNumber("A", a);
 	//SmartDashboard::PutNumber("C", c);
 
-	desiredAngle = 90 - (manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( abs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) ) );
+	desiredAngle = /*90 -*/ (manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( abs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) ) );
+	//if(desiredAngle < 50){
+		//desiredAngle = 50.0;
+	//}
 	SmartDashboard::PutNumber("launcher Angle", desiredAngle);
 }
 
@@ -95,9 +98,6 @@ void Launcher::moveToAngle(){
 
 	currentAngle = angleEncoder->GetDistance() + 50;
 	SmartDashboard::PutNumber("Current Angle", currentAngle);
-	if(desiredAngle < 40){
-		desiredAngle = 40.0;
-	}
 	double P = desiredAngle - currentAngle;
 	I += P;
 
@@ -122,16 +122,16 @@ void Launcher::lowGoalMoveAngle(){
 }
 
 void Launcher::launchFam(){
-	//double x = SmartDashboard::GetNumber("Real X", 0);
-	//double y = SmartDashboard::GetNumber("Real Y", 0);
-	//double distanceFromBoiler = sqrt( (pow(x, 2) + pow(y, 2)) );
+	double x = SmartDashboard::GetNumber("Real X", 0);
+	double y = SmartDashboard::GetNumber("Real Y", 0);
+	double distanceFromBoiler = sqrt( (pow(x, 2) + pow(y, 2)) );
 	double desiredVelocity;
 
-	//if(distanceFromBoiler < 250){//250 inches
+	if(distanceFromBoiler < 250){//250 inches
 		desiredVelocity = shortVelocity;
-	//}else{
-		//desiredVelocity = longVelocity;
-	//}
+	}else{
+		desiredVelocity = longVelocity;
+	}
 
 	const double kP = 0.03;
 	const double kI = 0.000000000001;

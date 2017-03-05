@@ -2,7 +2,7 @@
 
 CompleteLaunch::CompleteLaunch() {
 
-	//AddSequential(new Rotate());
+	AddSequential(new Rotate());
 	AddParallel(new SetLauncherAngle());
 	AddSequential(new Launch());
 

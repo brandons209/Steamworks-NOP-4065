@@ -128,6 +128,8 @@ void Robot::RobotInit() {
 
 	driveTrain.get()->ahrs.get()->ZeroYaw();
 
+	autonomousCommand.reset(new AutoCommandBuilder());
+
   }
 
 /**

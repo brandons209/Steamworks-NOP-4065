@@ -33,6 +33,7 @@
 #include "OI.h"
 #include "VisionClasses/Vision.h"
 #include "SmartDashboard/SendableChooser.h"
+#include "Commands/Autonomous Commands/AutoCommandBuilder.h"
 
 class Robot : public IterativeRobot {
 public:
