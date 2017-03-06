@@ -83,7 +83,7 @@ void Launcher::calculateAngle(){
 	//SmartDashboard::PutNumber("A", a);
 	//SmartDashboard::PutNumber("C", c);
 
-	desiredAngle = /*90 -*/ (manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( abs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) ) );
+	desiredAngle = 90 - (manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( abs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) ) );
 	//if(desiredAngle < 50){
 		//desiredAngle = 50.0;
 	//}
@@ -112,7 +112,7 @@ void Launcher::lowGoalMoveAngle(){
 		const double kI = 0.00000001;
 		const double forwardAngle = 90.0;
 
-		currentAngle = angleEncoder->GetDistance() + 40;
+		currentAngle = angleEncoder->GetDistance() + 50;
 		SmartDashboard::PutNumber("Current Angle", currentAngle);
 		double P = (forwardAngle + manualAngle) - currentAngle;
 		I += P;
