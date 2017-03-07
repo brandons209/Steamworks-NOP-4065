@@ -6,6 +6,8 @@
 #include "Commands/Launch.h"
 #include "Commands/SetLauncherAngle.h"
 #include "Commands/Load.h"
+#include "Commands/CalculatedLaunch.h"
+#include "SetLauncherManualAngle.h"
 
 class CompleteLaunch : public CommandGroup {
 public:

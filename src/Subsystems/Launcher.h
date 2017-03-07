@@ -43,9 +43,12 @@ public:
 	void lowGoalMoveAngle();
 	void reduceAngle();
 	void increaseAngle();
+	void setLauncherVelocity();
+	void moveToManualAngle();
+	void calculatedLaunchFam();
 	double desiredAngle;
 	double currentAngle;
-	double shortVelocity, longVelocity;
+	double shortVelocity, longVelocity, calculatedVelocity;
 	double I, I2;
 
 	std::shared_ptr<CANTalon> angleChanger;

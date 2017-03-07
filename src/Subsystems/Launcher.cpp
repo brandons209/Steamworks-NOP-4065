@@ -35,6 +35,7 @@ Launcher::Launcher() : Subsystem("Launcher") {
     I = 0;
     I2 = 0;
     manualAngle = 0;
+    calculatedVelocity = 0;
 
     launcherEncoder = RobotMap::launcherlauncherEncoder;
 
@@ -52,6 +53,39 @@ void Launcher::InitDefaultCommand() {
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
+
+void Launcher::moveToManualAngle(){
+	const double kP = 0.05;
+	const double kI = 0.00000001;
+
+	currentAngle = angleEncoder->GetDistance() + 50;
+	desiredAngle = currentAngle + manualAngle;
+
+	if(desiredAngle < 50){
+		desiredAngle = 50.0;
+	}
+
+	SmartDashboard::PutNumber("Current Angle", currentAngle);
+	double P = desiredAngle - currentAngle;
+	I += P;
+
+	//angleChanger->Set(-1.0 * (P*kP + I*kI));
+	angleChanger->Set(P*kP + I*kI);
+	//reset I in command
+}
+
+void Launcher::setLauncherVelocity(){
+	const double gravConst = 386.09;
+	const double towerHeight = 97.0;
+	double x = SmartDashboard::GetNumber("Real X", 0);
+	double y = SmartDashboard::GetNumber("Real Y", 0);
+	double distanceFromBoiler = sqrt( (pow(x, 2) + pow(y, 2)) );
+
+	calculatedVelocity = sqrt((-1 * 0.5) * gravConst * (pow(distanceFromBoiler,2)/(pow(cos(desiredAngle),2) * (towerHeight - (distanceFromBoiler * tan(desiredAngle) ) ) ) ) );
+
+	SmartDashboard::PutNumber("Calculated velocity", calculatedVelocity);
+
+}
 
 void Launcher::reduceAngle(){
 	manualAngle--;
@@ -119,6 +153,24 @@ void Launcher::lowGoalMoveAngle(){
 
 		//angleChanger->Set(-1.0 * (P*kP + I*kI));
 		angleChanger->Set(P*kP + I*kI);
+}
+
+void Launcher::calculatedLaunchFam(){
+
+	setLauncherVelocity();
+
+	const double kP = 0.03;
+	const double kI = 0.000000000001;
+	double currentVelocity = launcherEncoder->GetRate();
+	double desiredVelocity = calculatedVelocity;
+	SmartDashboard::PutNumber("Desired Launcher Velocity", desiredVelocity);
+	SmartDashboard::PutNumber("Launcher Velocity", currentVelocity);
+
+	double P = desiredVelocity - currentVelocity;
+	I2 += P;
+
+	launcherMotor->Set(-1.0 * (P*kP + I*kI));
+
 }
 
 void Launcher::launchFam(){

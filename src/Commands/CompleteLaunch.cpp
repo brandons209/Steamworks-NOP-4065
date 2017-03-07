@@ -3,9 +3,10 @@
 CompleteLaunch::CompleteLaunch() {
 
 	AddSequential(new Rotate());
-	AddParallel(new SetLauncherAngle());
-	AddSequential(new Launch());
-
+	//AddParallel(new SetLauncherAngle());
+	//AddSequential(new Launch());//calculating angle
+	AddParallel(new SetLauncherManualAngle());
+	AddSequential(new CalculatedLaunch());//calculating velocity
 
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());
