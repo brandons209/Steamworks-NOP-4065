@@ -81,7 +81,7 @@ void Launcher::setLauncherVelocity(){
 	double y = SmartDashboard::GetNumber("Real Y", 0);
 	double distanceFromBoiler = sqrt( (pow(x, 2) + pow(y, 2)) );
 
-	calculatedVelocity = sqrt((-1 * 0.5) * gravConst * (pow(distanceFromBoiler,2)/(pow(cos(desiredAngle),2) * (towerHeight - (distanceFromBoiler * tan(desiredAngle) ) ) ) ) );
+	calculatedVelocity = sqrt(fabs( (-1 * 0.5) * gravConst * (pow(distanceFromBoiler,2)/(pow(cos(desiredAngle),2) * (towerHeight - (distanceFromBoiler * tan(desiredAngle) ) ) ) ) ) );
 
 	SmartDashboard::PutNumber("Calculated velocity", calculatedVelocity);
 
@@ -117,7 +117,7 @@ void Launcher::calculateAngle(){
 	//SmartDashboard::PutNumber("A", a);
 	//SmartDashboard::PutNumber("C", c);
 
-	desiredAngle = 90 - (manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( abs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) ) );
+	desiredAngle = 90 - (manualAngle + (atan( ( ( (-1.0 * distanceFromBoiler) - sqrt( fabs( (pow(distanceFromBoiler, 2)) - (4.0*a*c) ) ) ) / (2.0 * a) ) ) * (180.0/M_PI) ) );
 	//if(desiredAngle < 50){
 		//desiredAngle = 50.0;
 	//}
@@ -144,7 +144,7 @@ void Launcher::moveToAngle(){
 void Launcher::lowGoalMoveAngle(){
 		const double kP = 0.05;
 		const double kI = 0.00000001;
-		const double forwardAngle = 90.0;
+		const double forwardAngle = 86.0;
 
 		currentAngle = angleEncoder->GetDistance() + 50;
 		SmartDashboard::PutNumber("Current Angle", currentAngle);

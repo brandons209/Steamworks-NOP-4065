@@ -2,7 +2,18 @@
 
 CompleteLaunch::CompleteLaunch() {
 
-	AddSequential(new Rotate());
+		double degreeConversion = 180/M_PI;
+		double targetAngle;
+		double realX = SmartDashboard::GetNumber("Real X", 0);
+		double realY = SmartDashboard::GetNumber("Real Y", 0);
+
+		if(0 - realX < 0){
+			targetAngle = 180 + (atan( realY / realX ) * degreeConversion);
+		}else{
+			targetAngle = atan( realY / realX ) * degreeConversion;
+		}
+
+	AddSequential(new Rotate(targetAngle));
 	//AddParallel(new SetLauncherAngle());
 	//AddSequential(new Launch());//calculating angle
 	AddParallel(new SetLauncherManualAngle());

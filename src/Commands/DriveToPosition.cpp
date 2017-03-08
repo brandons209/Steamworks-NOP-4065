@@ -34,8 +34,8 @@ DriveToPosition::DriveToPosition() {
 
 	SmartDashboard::PutNumber("Desired Angle To Rotate", targetAngle);
 
-	AddSequential(new Rotate());
-	AddSequential(new DriveForward());
+	//AddSequential(new Rotate());
+	//AddSequential(new DriveForward());
 
 
      // Add Commands here:

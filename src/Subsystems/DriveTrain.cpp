@@ -85,8 +85,8 @@ void DriveTrain::tankDrive(std::shared_ptr<Joystick> driveStick){
 		leftValue = -1 * driveStick.get()->GetRawAxis(1);
 		rightValue = driveStick.get()->GetRawAxis(5);
 	}else{
-		leftValue =  driveStick.get()->GetRawAxis(1);
-		rightValue = -1 * driveStick.get()->GetRawAxis(5);
+		leftValue =  driveStick.get()->GetRawAxis(5);
+		rightValue = -1 * driveStick.get()->GetRawAxis(1);
 	}
 
 	if(fabs(leftValue) > 0.1 || fabs(rightValue) > 0.1){
@@ -173,19 +173,6 @@ void DriveTrain::updatePos(){
 
 	SmartDashboard::PutNumber("Real X", realX);
 	SmartDashboard::PutNumber("Real Y", realY);
-
-
-	double degreeConversion = 180/M_PI;
-	double targetAngle;
-
-	if(0 - realX < 0){
-		targetAngle = 180 + (atan( realY / realX ) * degreeConversion);
-	}else{
-		targetAngle = atan( realY / realX ) * degreeConversion;
-	}
-
-	SmartDashboard::PutNumber("Desired Angle To Rotate for boiler", targetAngle);
-
 
 
 }
