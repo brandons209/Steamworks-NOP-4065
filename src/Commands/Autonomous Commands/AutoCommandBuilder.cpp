@@ -20,6 +20,9 @@ AutoCommandBuilder::AutoCommandBuilder() {
 
 	}else if(Robot::autoChooser2.GetSelected() == "s3"){
 		//do some codes here use solidworks model
+		//rotate
+		//drive to hopper
+		//turn and shoot
 	}
 
 
