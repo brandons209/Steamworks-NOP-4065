@@ -5,21 +5,41 @@ AutoCommandBuilder::AutoCommandBuilder() {
 	if(Robot::autoChooser1.GetSelected() == "drive"){
 		//SmartDashboard::PutNumber("Drive to point x:", Robot::driveTrain.get()->realX);
 		//SmartDashboard::PutNumber("Drive to point y:", (Robot::driveTrain.get()->realY + (116.0 - Robot::yOffset)));
-		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (116.0 - Robot::yOffset)));//need fix distance
-	}else if(Robot::autoChooser1.GetSelected() == "g1"){
+		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (116.0 - Robot::yOffset)));
+	}else if(Robot::autoChooser1.GetSelected() == "g1" && Robot::autoChooser2.GetSelected() == "s1"){//gear and shoot
 
 	}else if(Robot::autoChooser1.GetSelected() == "g2"){
-		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (90.0 - Robot::yOffset)));//need fix distance
+		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (100.0 - Robot::yOffset)));
 	}else if(Robot::autoChooser1.GetSelected() == "g3"){
 
-	}
+	}else if(Robot::autoChooser1.GetSelected() == "g1"){//gear boiler closest
 
-	if(Robot::autoChooser2.GetSelected() == "s1"){
+	}else if(Robot::autoChooser2.GetSelected() == "s1"){//shoot only
+		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (115.0 - Robot::yOffset)));
+		AddSequential(new Rotate(90));
+		AddSequential(new DriveForward(Robot::driveTrain.get()->realX - 100.0, Robot::driveTrain.get()->realY));
+		AddSequential(new DriveForward(Robot::driveTrain.get()->realX + 30.0, Robot::driveTrain.get()->realY));
+
+		double degreeConversion = 180/M_PI;
+		double targetAngle;
+		double realX = Robot::driveTrain.get()->realX;
+		double realY = Robot::driveTrain.get()->realY;
+
+		if(0 - realX < 0){
+			targetAngle = 180 + (atan( realY / realX ) * degreeConversion);
+		}else{
+			targetAngle = atan( realY / realX ) * degreeConversion;
+		}
+			AddSequential(new Rotate(targetAngle));
+			//AddParallel(new SetLauncherAngle());
+			//AddSequential(new Launch());//calculating angle
+			AddParallel(new SetLauncherManualAngle());
+			AddSequential(new CalculatedLaunch());//calculating velocity
 
 	}else if(Robot::autoChooser2.GetSelected() == "s2"){
 
 	}else if(Robot::autoChooser2.GetSelected() == "s3"){
-		//do some codes here use solidworks model
+
 		//rotate
 		//drive to hopper
 		//turn and shoot

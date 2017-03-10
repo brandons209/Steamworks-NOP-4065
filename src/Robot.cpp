@@ -52,18 +52,18 @@ static void drawRectangles(){
 }
 
 void Robot::chooseAllianceNumber(){
-	const double station3X = 102.97;
-	const double station2X = 175.16;
-	const double station1X = 205.97;
-	//const double station1X = 36.0;
+	const double stationClosestBoiler = 102.97;
+	const double stationMiddle = 175.16 - 20.5 + 13;
+	const double stationFarthest = 205.97 + 30;
+
 	yOffset = 25.5 - 6.36;
 
 	if(driverStation.GetSelected() == "1"){
-		xOffset = station1X;
+		xOffset = stationClosestBoiler;
 	}else if(driverStation.GetSelected() == "2"){
-		xOffset = station2X;
+		xOffset = stationMiddle;
 	}else{
-		xOffset = station3X;
+		xOffset = stationFarthest;
 	}
 }
 
@@ -94,24 +94,24 @@ void Robot::RobotInit() {
 	SmartDashboard::PutData("Choose Alliance Side", &allianceColor);
 	allianceSide = allianceColor.GetSelected();
 
-	driverStation.AddDefault("Station 1", "1");
-	driverStation.AddObject("Station 2", "2");
-	driverStation.AddObject("Station 3", "3");
+	driverStation.AddDefault("Station Closest To Boiler", "1");
+	driverStation.AddObject("Station Middle", "2");
+	driverStation.AddObject("Station Farthest", "3");
 	SmartDashboard::PutData("Choose Station Number", &driverStation);
 
 	chooseAllianceNumber();
 
 	autoChooser1.AddDefault("Drive Forward", "drive");
 	autoChooser1.AddObject("Do Nothing", "nothing");
-	autoChooser1.AddObject("Gear station 1", "g1");
-	autoChooser1.AddObject("Gear station 2", "g2");
-	autoChooser1.AddObject("Gear station 3", "g3");
+	autoChooser1.AddObject("Gear station Closest", "g1");
+	autoChooser1.AddObject("Gear station Middle", "g2");
+	autoChooser1.AddObject("Gear station Farthest-no use", "g3");
 	SmartDashboard::PutData("First Auto Mode", &autoChooser1);
 
 	autoChooser2.AddDefault("Do Nothing", "nothing");
-	autoChooser2.AddObject("Shoot station 1", "s1");
-	autoChooser2.AddObject("Shoot station 2", "s2");
-	autoChooser2.AddObject("Shoot station 3", "s3");
+	autoChooser2.AddObject("Shoot station Closest", "s1");
+	autoChooser2.AddObject("Shoot station Middle", "s2");
+	autoChooser2.AddObject("Shoot station Farthest-no use", "s3");
 	SmartDashboard::PutData("Second Auto Mode", &autoChooser2);
 
 	updatePosition.reset(new UpdatePosition());

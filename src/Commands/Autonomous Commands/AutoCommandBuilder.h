@@ -9,6 +9,8 @@
 #include "../Load.h"
 #include "../Rotate.h"
 #include "../SetLauncherAngle.h"
+#include "../SetLauncherManualAngle.h"
+#include "../CalculatedLaunch.h"
 
 class AutoCommandBuilder : public CommandGroup {
 public:

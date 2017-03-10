@@ -13,11 +13,12 @@ CompleteLaunch::CompleteLaunch() {
 			targetAngle = atan( realY / realX ) * degreeConversion;
 		}
 
-	AddSequential(new Rotate(targetAngle));
+	//AddSequential(new Rotate(targetAngle));
 	//AddParallel(new SetLauncherAngle());
-	//AddSequential(new Launch());//calculating angle
 	AddParallel(new SetLauncherManualAngle());
-	AddSequential(new CalculatedLaunch());//calculating velocity
+	AddSequential(new Launch());//calculating angle
+	//AddParallel(new SetLauncherManualAngle());
+	//AddSequential(new CalculatedLaunch());//calculating velocity
 
 	// Add Commands here:
 	// e.g. AddSequential(new Command1());

@@ -88,11 +88,11 @@ void Launcher::setLauncherVelocity(){
 }
 
 void Launcher::reduceAngle(){
-	manualAngle--;
+	manualAngle++;
 }
 
 void Launcher::increaseAngle(){
-	manualAngle++;
+	manualAngle--;
 }
 
 void Launcher::calculateAngle(){

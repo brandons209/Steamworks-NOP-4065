@@ -199,6 +199,9 @@ void DriveTrain::driveToPoint(double xTargetPos, double yTargetPos){
 
 	updatePos();
 
+	SmartDashboard::PutNumber("Drive to point x", xTargetPos);
+	SmartDashboard::PutNumber("Drive to point y", yTargetPos);
+
 	if(realX < xTargetPos && realY < yTargetPos){
 		driveForward();
 	}else{
