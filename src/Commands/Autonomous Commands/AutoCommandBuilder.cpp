@@ -5,20 +5,24 @@ AutoCommandBuilder::AutoCommandBuilder() {
 	if(Robot::autoChooser1.GetSelected() == "drive"){
 		//SmartDashboard::PutNumber("Drive to point x:", Robot::driveTrain.get()->realX);
 		//SmartDashboard::PutNumber("Drive to point y:", (Robot::driveTrain.get()->realY + (116.0 - Robot::yOffset)));
-		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (116.0 - Robot::yOffset)));
+		AddSequential(new DriveForward());
 	}else if(Robot::autoChooser1.GetSelected() == "g1" && Robot::autoChooser2.GetSelected() == "s1"){//gear and shoot
 
 	}else if(Robot::autoChooser1.GetSelected() == "g2"){
-		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (100.0 - Robot::yOffset)));
-	}else if(Robot::autoChooser1.GetSelected() == "g3"){
+		AddSequential(new DriveForwardGearMiddle());
+	}else if(Robot::autoChooser1.GetSelected() == "g3"){//finish now
 
 	}else if(Robot::autoChooser1.GetSelected() == "g1"){//gear boiler closest
+		AddSequential(new DriveForwardGearClosestOne());
+		AddSequential(new RotateClosest());
+		AddSequential(new DriveForwardGearClosestTwo());
 
 	}else if(Robot::autoChooser2.GetSelected() == "s1"){//shoot only
-		AddSequential(new DriveForward(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (115.0 - Robot::yOffset)));
-		AddSequential(new Rotate(90));
-		AddSequential(new DriveForward(Robot::driveTrain.get()->realX - 100.0, Robot::driveTrain.get()->realY));
-		AddSequential(new DriveForward(Robot::driveTrain.get()->realX + 30.0, Robot::driveTrain.get()->realY));
+		AddSequential(new DriveForwardGearClosestOne());
+		AddSequential(new Rotate());//need new rotate
+		//AddSequential(new DriveForward(Robot::driveTrain.get()->realX - 100.0, Robot::driveTrain.get()->realY));
+		Wait(1.0);
+		//AddSequential(new DriveForward(Robot::driveTrain.get()->realX + 30.0, Robot::driveTrain.get()->realY));
 
 		double degreeConversion = 180/M_PI;
 		double targetAngle;
@@ -30,7 +34,7 @@ AutoCommandBuilder::AutoCommandBuilder() {
 		}else{
 			targetAngle = atan( realY / realX ) * degreeConversion;
 		}
-			AddSequential(new Rotate(targetAngle));
+			//AddSequential(new Rotate(targetAngle));
 			//AddParallel(new SetLauncherAngle());
 			//AddSequential(new Launch());//calculating angle
 			AddParallel(new SetLauncherManualAngle());

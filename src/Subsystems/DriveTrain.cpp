@@ -123,7 +123,7 @@ void DriveTrain::rotate(double targetAngle){
 	rightFront.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
 	rightBack.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
 
-	if(P > -1.5 && P < 1.5){
+	if(P > -1.0 && P < 1.0){
 		isFinished = true;
 	}else{
 		isFinished = false;

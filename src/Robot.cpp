@@ -105,13 +105,13 @@ void Robot::RobotInit() {
 	autoChooser1.AddObject("Do Nothing", "nothing");
 	autoChooser1.AddObject("Gear station Closest", "g1");
 	autoChooser1.AddObject("Gear station Middle", "g2");
-	autoChooser1.AddObject("Gear station Farthest-no use", "g3");
+	autoChooser1.AddObject("Gear station Farthest", "g3");
 	SmartDashboard::PutData("First Auto Mode", &autoChooser1);
 
 	autoChooser2.AddDefault("Do Nothing", "nothing");
 	autoChooser2.AddObject("Shoot station Closest", "s1");
 	autoChooser2.AddObject("Shoot station Middle", "s2");
-	autoChooser2.AddObject("Shoot station Farthest-no use", "s3");
+	autoChooser2.AddObject("Shoot station Farthest", "s3");
 	SmartDashboard::PutData("Second Auto Mode", &autoChooser2);
 
 	updatePosition.reset(new UpdatePosition());

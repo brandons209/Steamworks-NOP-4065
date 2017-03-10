@@ -11,6 +11,10 @@
 #include "../SetLauncherAngle.h"
 #include "../SetLauncherManualAngle.h"
 #include "../CalculatedLaunch.h"
+#include "DriveForwardGearMiddle.h"
+#include "DriveForwardGearClosestOne.h"
+#include "RotateClosest.h"
+#include "DriveForwardGearClosestTwo.h"
 
 class AutoCommandBuilder : public CommandGroup {
 public:
