@@ -13,7 +13,7 @@ void DriveForwardGearMiddle::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void DriveForwardGearMiddle::Execute() {
-	Robot::driveTrain.get()->driveToPoint(Robot::driveTrain.get()->realX, Robot::driveTrain.get()->realY + (100.0 - Robot::yOffset));
+	Robot::driveTrain.get()->driveToPoint(Robot::driveTrain.get()->realX, 108.0 - Robot::yOffset);
 }
 
 // Make this return true when this Command no longer needs to run execute()

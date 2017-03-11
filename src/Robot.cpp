@@ -31,17 +31,17 @@ std::string Robot::allianceSide;
 
 static void drawRectangles(){
 	cs::CvSink cvSink = CameraServer::GetInstance()->GetVideo();
-	cs::CvSource outputStream = CameraServer::GetInstance()->PutVideo("Gear Box", 640, 480);
+	cs::CvSource outputStream = CameraServer::GetInstance()->PutVideo("Gear Box", 320, 240);
 	cv::Mat source;
 
 	while(true){
 		cvSink.GrabFrame(source);
 
 		if(!source.empty()){
-			cv::Point leftTop = cv::Point((640.0/2.0) - 10.0, 480.0/2.0);
-			cv::Point rightBot = cv::Point((640.0/2.0) + 10.0, 479);
+			cv::Point leftTop = cv::Point((320.0/2.0) - 5.0, 240.0/2.0);
+			cv::Point rightBot = cv::Point((320.0/2.0) + 5.0, 239);
 
-			cv::rectangle(source, leftTop, rightBot, cv::Scalar( 0, 255, 0 ), 4);
+			cv::rectangle(source, leftTop, rightBot, cv::Scalar( 0, 255, 0 ), 2);
 
 			outputStream.PutFrame(source);
 		}else{
@@ -121,14 +121,12 @@ void Robot::RobotInit() {
 
 	cs::UsbCamera cvcam;
 	cvcam = CameraServer::GetInstance()->StartAutomaticCapture();
-	cvcam.SetResolution(640,480);
+	cvcam.SetResolution(320,240);//orginial 640, 480
 
 	std::thread gearboxThread(drawRectangles);
 	gearboxThread.detach();
 
 	driveTrain.get()->ahrs.get()->ZeroYaw();
-
-	autonomousCommand.reset(new AutoCommandBuilder());
 
   }
 
@@ -148,6 +146,17 @@ void Robot::AutonomousInit() {
 	updatePosition->Start();
 	allianceSide = allianceColor.GetSelected();
 	chooseAllianceNumber();
+	if(autoChooser1.GetSelected() == "drive"){
+		autonomousCommand.reset(new AutoCommandBuilder());
+	}else if(autoChooser1.GetSelected() == "g1"){
+		autonomousCommand.reset(new GearClosest());
+	}else if(autoChooser1.GetSelected() == "g2"){
+		autonomousCommand.reset(new GearMiddle());
+	}else if(autoChooser1.GetSelected() == "g3"){
+		autonomousCommand.reset(new GearFarthest());
+	}else if(autoChooser2.GetSelected() == "s1"){
+		autonomousCommand.reset(new ShootClosest());
+	}
 	if (autonomousCommand.get() != nullptr)
 		autonomousCommand->Start();
 }

@@ -34,6 +34,11 @@
 #include "VisionClasses/Vision.h"
 #include "SmartDashboard/SendableChooser.h"
 #include "Commands/Autonomous Commands/AutoCommandBuilder.h"
+#include "Commands/DriveForward.h"
+#include "Commands/Autonomous Commands/GearMiddle.h"
+#include "Commands/Autonomous Commands/GearClosest.h"
+#include "Commands/Autonomous Commands/GearFarthest.h"
+#include "Commands/Autonomous Commands/ShootClosest.h"
 
 class Robot : public IterativeRobot {
 public:

@@ -1,8 +1,9 @@
 #include "AutoCommandBuilder.h"
 
 AutoCommandBuilder::AutoCommandBuilder() {
+	AddSequential(new DriveForward());
 
-	if(Robot::autoChooser1.GetSelected() == "drive"){
+	/*if(Robot::autoChooser1.GetSelected() == "drive"){
 		//SmartDashboard::PutNumber("Drive to point x:", Robot::driveTrain.get()->realX);
 		//SmartDashboard::PutNumber("Drive to point y:", (Robot::driveTrain.get()->realY + (116.0 - Robot::yOffset)));
 		AddSequential(new DriveForward());
@@ -10,7 +11,10 @@ AutoCommandBuilder::AutoCommandBuilder() {
 
 	}else if(Robot::autoChooser1.GetSelected() == "g2"){
 		AddSequential(new DriveForwardGearMiddle());
-	}else if(Robot::autoChooser1.GetSelected() == "g3"){//finish now
+	}else if(Robot::autoChooser1.GetSelected() == "g3"){
+		AddSequential(new DriveForwardFarthestOne());
+		AddSequential(new RotateFarthest());
+		AddSequential(new DriveForwardGearFarthestTwo());
 
 	}else if(Robot::autoChooser1.GetSelected() == "g1"){//gear boiler closest
 		AddSequential(new DriveForwardGearClosestOne());
@@ -33,21 +37,22 @@ AutoCommandBuilder::AutoCommandBuilder() {
 			targetAngle = 180 + (atan( realY / realX ) * degreeConversion);
 		}else{
 			targetAngle = atan( realY / realX ) * degreeConversion;
-		}
+		}*/
 			//AddSequential(new Rotate(targetAngle));
 			//AddParallel(new SetLauncherAngle());
 			//AddSequential(new Launch());//calculating angle
-			AddParallel(new SetLauncherManualAngle());
-			AddSequential(new CalculatedLaunch());//calculating velocity
+			//AddParallel(new SetLauncherManualAngle());
+			//AddSequential(new CalculatedLaunch());//calculating velocity
 
-	}else if(Robot::autoChooser2.GetSelected() == "s2"){
+	//}else if(Robot::autoChooser2.GetSelected() == "s2"){
 
-	}else if(Robot::autoChooser2.GetSelected() == "s3"){
+	//}else if(Robot::autoChooser2.GetSelected() == "s3"){
 
 		//rotate
 		//drive to hopper
 		//turn and shoot
-	}
+	//}
+
 
 
 }

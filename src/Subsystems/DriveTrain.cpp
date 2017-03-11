@@ -118,12 +118,14 @@ void DriveTrain::rotate(double targetAngle){
 	P = targetAngle - currentAngle;
 	I += P;
 
+
+
 	leftFront.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
 	leftBack.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);//need to see if it rotates direction closest to angle.
 	rightFront.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
 	rightBack.get()->Set(P*RobotMap::kP + I*RobotMap::kI /*- D*kD*/);
 
-	if(P > -1.0 && P < 1.0){
+	if(P > -2.0 && P < 2.0){
 		isFinished = true;
 	}else{
 		isFinished = false;
@@ -180,7 +182,7 @@ void DriveTrain::updatePos(){
 
 void DriveTrain::driveForward(){
 
-	double leftValue = -0.75, rightValue = 0.75;
+	double leftValue = -0.5, rightValue = 0.5;
 
 	leftFront.get()->Set(leftValue);
 	leftBack.get()->Set(leftValue);
@@ -198,11 +200,13 @@ void DriveTrain::stop(){
 void DriveTrain::driveToPoint(double xTargetPos, double yTargetPos){
 
 	updatePos();
+	double distance= sqrt( (pow((realX - xTargetPos), 2) + pow((realY - yTargetPos), 2)) );
 
 	SmartDashboard::PutNumber("Drive to point x", xTargetPos);
 	SmartDashboard::PutNumber("Drive to point y", yTargetPos);
+	SmartDashboard::PutNumber("Distance to point", distance);
 
-	if(realX < xTargetPos && realY < yTargetPos){
+	if(/*realX < xTargetPos && realY < yTargetPos*/ distance > 3.0){
 		driveForward();
 	}else{
 		isFinished = true;

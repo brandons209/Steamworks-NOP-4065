@@ -15,6 +15,10 @@
 #include "DriveForwardGearClosestOne.h"
 #include "RotateClosest.h"
 #include "DriveForwardGearClosestTwo.h"
+#include "DriveForwardFarthestOne.h"
+#include "RotateFarthest.h"
+#include "DriveForwardGearFarthestTwo.h"
+
 
 class AutoCommandBuilder : public CommandGroup {
 public:
